@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int SMSENCRYPT = 0;
     public static final int JSON = 1;
     public static final int VIEWDB = 2;
-    public static final int EXIT = 3;
+    public static final int ABOUT = 3;
+    public static final int EXIT = 4;
 
     TextView tvDate;
     EditText etEUR, etUSD, etGBP, etXAU;
@@ -240,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, SMSENCRYPT, 0, "SMS Encrypt Activity");
         menu.add(0, JSON, 1, "JSON Activity");
         menu.add(0, VIEWDB, 2, "View database");
-        menu.add(0, EXIT, 3, "Close the application");
+        menu.add(0, ABOUT, 3, "About");
+        menu.add(0, EXIT, 4, "Close the application");
 
         return true;
     }
@@ -261,6 +263,10 @@ public class MainActivity extends AppCompatActivity {
             case VIEWDB:
                 Intent intent2 = new Intent(getApplicationContext(), ViewDBActivity.class);
                 startActivity(intent2);
+                break;
+            case ABOUT:
+                Intent intent3 = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent3);
                 break;
             case EXIT:
                 android.os.Process.killProcess(android.os.Process.myPid());
