@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ISM2022</string>
+    <string name="date">Date:</string>
+    <string name="eur">EUR:</string>
+    <string name="usd">USD:</string>
+    <string name="gbp">GBP:</string>
+    <string name="xau">XAU:</string>
+    <string name="show_fx_rates">Show FX rates</string>
+    <string name="save_internal_storage">Save internal storage</string>
+    <string name="android_sms_encryption_with_rsa">Android SMS Encryption with RSA</string>
+    <string name="message_to_encrypt">MESSAGE TO ENCRYPT</string>
+    <string name="phone_number">Phone number</string>
+    <string name="encrypt_your_message_only">Encrypt your message only</string>
+    <string name="encrypt_and_send_the_message">Encrypt and send the message</string>
+    <string name="welcome_to_out_android_app">Welcome to out Android App</string>
+</resources>
