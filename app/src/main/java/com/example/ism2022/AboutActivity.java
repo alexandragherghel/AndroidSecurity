@@ -97,6 +97,10 @@ public class AboutActivity extends AppCompatActivity {
 			pim.sendEmail();
 			Toast.makeText(this, "Mail creat cu succes!", Toast.LENGTH_LONG).show();
 			break;
+			case SENSORS:
+				Intent intentSenzori = new Intent(this, SenzoriGPS.class);
+				startActivity(intentSenzori);
+				return true;
 		}
 		return false;
 	}
