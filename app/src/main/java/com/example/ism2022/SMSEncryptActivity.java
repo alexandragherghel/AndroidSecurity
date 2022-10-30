@@ -1,7 +1,12 @@
 package com.example.ism2022;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +17,7 @@ import android.widget.Toast;
 import java.math.BigInteger;
 
 public class SMSEncryptActivity extends AppCompatActivity {
-
+BigInteger cyphertext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +31,7 @@ public class SMSEncryptActivity extends AppCompatActivity {
 
         String[] contacts = {"1 Gigel 0721345678", "2 Dorel 0764765770"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.support.constraint.R.layout.support_simple_spinner_dropdown_item,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
                 contacts);
         spinner.setAdapter(adapter);
 
@@ -48,10 +53,21 @@ public class SMSEncryptActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         } else {
                             BigInteger plainText = new BigInteger(text.getBytes());
-                            BigInteger cypherText = rsa.encrypt(plainText);
-                            Toast.makeText(getApplicationContext(), cypherText.toString(),
+                            cyphertext = rsa.encrypt(plainText);
+                            Toast.makeText(getApplicationContext(), cyphertext.toString(),
                                     Toast.LENGTH_LONG).show();
                         }
+
+                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(SMSEncryptActivity.this, new String[]{Manifest.permission.SEND_SMS},0);
+                        }
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(phoneNumber,null,
+                                cyphertext.toString(),null,null);
+                        Toast.makeText(getApplicationContext(), cyphertext.toString(),
+                                Toast.LENGTH_LONG).show();
+
                     }
                 }
         );

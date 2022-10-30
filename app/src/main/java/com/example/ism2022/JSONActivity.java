@@ -2,11 +2,16 @@ package com.example.ism2022;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +68,21 @@ public class JSONActivity extends ListActivity {
                 ListAdapter adapter = new SimpleAdapter(JSONActivity.this,
                         movieList, R.layout.list_item,
                         new String[]{TAG_TITLE, TAG_RELEASE, TAG_DURATION},
-                        new int[]{R.id.title, R.id.release, R.id.duration});
+                        new int[]{R.id.title, R.id.release, R.id.duration}) {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View view = super.getView(position, convertView, parent);
+                        HashMap<String, String> currentRow = movieList.get(position);
+                        TextView tvDuration = view.findViewById(R.id.duration);
+                        int value = Integer.parseInt(currentRow.get(TAG_DURATION));
+                        if (value < 100) {
+                            tvDuration.setTextColor(Color.RED);
+                        } else {
+                            tvDuration.setTextColor(Color.GREEN);
+                        }
+                        return view;
+                    }
+                };
                 setListAdapter(adapter);
             }
         });
