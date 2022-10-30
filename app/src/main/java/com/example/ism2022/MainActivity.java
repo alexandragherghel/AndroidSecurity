@@ -2,9 +2,9 @@ package com.example.ism2022;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +28,8 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     public static final int SMSENCRYPT = 0;
-    public static final int EXIT = 1;
+    public static final int EXIT = 2;
+    private static final int JSON = 1;
     TextView tvDate;
     EditText etEUR, etUSD, etGBP, etXAU;
 
@@ -55,12 +55,6 @@ public class MainActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                tvDate.setText("Date: 2022-10-29");
-//                etEUR.setText("4.91");
-//                etUSD.setText("5.21");
-//                etGBP.setText("5.55");
-//                etXAU.setText("232.71");
-//                Toast.makeText(getApplicationContext(), "FX rates displayed succesfully!", Toast.LENGTH_LONG).show();
                 Network network = new Network() {
                     @Override
                     protected void onPostExecute(InputStream inputStream) {
@@ -83,17 +77,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int position = spinner.getSelectedItemPosition();
-                FXRate fxRate = new FXRate(tvDate.getText().toString(),
-                        etEUR.getText().toString(), etUSD.getText().toString(),
-                        etGBP.getText().toString(), etXAU.getText().toString());
+                FXRate fxRate = new FXRate(tvDate.getText().toString(), etEUR.getText().toString(), etUSD.getText().toString(), etGBP.getText().toString(), etXAU.getText().toString());
 
                 if (position == 0) {
                     try {
                         writeFxRateToFile("file.dat", fxRate);
                         fxRate = null;
                         fxRate = readFxRateFromFile("file.dat");
-                        Toast.makeText(getApplicationContext(), fxRate.toString(),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), fxRate.toString(), Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -178,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, SMSENCRYPT, 0, "SMS Encrypt Activity");
-        menu.add(0, EXIT, 1, "Close the application");
+        menu.add(0, JSON, 1, "JSON Activity");
+        menu.add(0, EXIT, 2, "Close the application");
         return true;
     }
 
@@ -188,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
             case SMSENCRYPT:
                 Intent intent = new Intent(this, SMSEncryptActivity.class);
                 startActivity(intent);
+                break;
+            case JSON:
+                Intent intent1 = new Intent(getApplicationContext(),JSONActivity.class);
+                startActivity(intent1);
                 break;
             case EXIT:
                 android.os.Process.killProcess(android.os.Process.myPid());

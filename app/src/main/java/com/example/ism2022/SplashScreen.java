@@ -1,8 +1,8 @@
 package com.example.ism2022;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;

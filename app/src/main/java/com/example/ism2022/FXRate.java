@@ -62,12 +62,6 @@ public class FXRate implements Serializable {
 
     @Override
     public String toString() {
-        return "FXRate{" +
-                "date='" + date + '\'' +
-                ", euro='" + euro + '\'' +
-                ", dolar='" + dolar + '\'' +
-                ", pound='" + pound + '\'' +
-                ", gold='" + gold + '\'' +
-                '}';
+        return "FXRate{" + "date='" + date + '\'' + ", euro='" + euro + '\'' + ", dolar='" + dolar + '\'' + ", pound='" + pound + '\'' + ", gold='" + gold + '\'' + '}';
     }
 }
