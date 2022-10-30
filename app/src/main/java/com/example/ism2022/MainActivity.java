@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int JSON = 1;
     public static final int VIEWDB = 2;
     public static final int ABOUT = 3;
-    public static final int EXIT = 4;
+    public static final int SETTINGS = 4;
+    public static final int EXIT = 5;
 
     TextView tvDate;
     EditText etEUR, etUSD, etGBP, etXAU;
@@ -242,7 +243,8 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, JSON, 1, "JSON Activity");
         menu.add(0, VIEWDB, 2, "View database");
         menu.add(0, ABOUT, 3, "About");
-        menu.add(0, EXIT, 4, "Close the application");
+        menu.add(0, SETTINGS, 4, "Settings");
+        menu.add(0, EXIT, 5, "Close the application");
 
         return true;
     }
@@ -267,6 +269,10 @@ public class MainActivity extends AppCompatActivity {
             case ABOUT:
                 Intent intent3 = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(intent3);
+                break;
+            case SETTINGS:
+                Intent intent4 = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent4);
                 break;
             case EXIT:
                 android.os.Process.killProcess(android.os.Process.myPid());

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <PreferenceCategory android:title="Application settings">
+
+        <EditTextPreference
+            android:name="App Developer"
+            android:summary="App Developer"
+            android:title="App Developer"
+            android:defaultValue = "@ISM2021"
+            android:key="etDeveloper"/>
+
+        <CheckBoxPreference
+            android:key="cbDarkTheme"
+            android:summary="Activate dark mode?"
+            android:title="Activate dark mode?"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
